@@ -1,0 +1,76 @@
+#include<stdio.h> 
+
+void swap(int *a, int *b) 
+{ 
+    *a=*a+*b-(*b=*a); 
+} 
+void merge(int leftarray[],int rightarray[],int array[],int n)
+{
+    int leftsize=n/2;
+    int rightsize=n - leftsize;
+    int i=0,l=0,r=0;
+    while(l<leftsize&&r<rightsize)
+    {
+        if(leftarray[l]<rightarray[r])
+        {
+            array[i]=leftarray[l];
+            i++;
+            l++;
+        }
+        else
+        {
+            array[i]=rightarray[r];
+            i++;r++;
+        }
+    }
+
+    while(l<leftsize)
+    {
+         array[i]=leftarray[l];
+            i++;
+            l++;
+    }
+    while(r<rightsize)
+    {
+         array[i]=rightarray[r];
+            i++;
+            r++;
+    }
+
+}
+
+void mergeSort(int array[], int n)
+{ 
+    if(n<=1){return;}
+    int leftsize=n/2;
+    int rightlength=n- leftsize;
+    int leftarray[leftsize],rightarray[rightlength];
+    int j=0;
+    for(int i=0;i<n;i++)
+    {
+        if(i<leftsize)
+        {
+            leftarray[i]=array[i];
+        }
+        else
+        {
+            rightarray[j]=array[i];
+            j++;
+        }
+    }
+     mergeSort(leftarray,leftsize); //recursive call to sort left sub-array
+    mergeSort(rightarray,rightlength); //recursive call to sort right sub-array
+
+    merge(leftarray,rightarray,array,n); //merge the sorted sub-arrays
+   
+} 
+
+int main() 
+{ 
+    int a[]={9,4,7,2,8,3,7,2,9,33,12,00,66,28,12}; 
+    mergeSort(a,15); 
+    for(int i=0;i<15;i++) 
+    { 
+        printf("%i ",a[i]); 
+    } 
+}
