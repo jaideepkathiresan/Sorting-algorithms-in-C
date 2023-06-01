@@ -1,0 +1,8 @@
+Radix sort - O(d(n+k)) where d is the number of digits in the largest number and k is the range of input.
+Merge sort - O(nlogn) where n is the number of elements in the array.
+Heap sort - O(nlogn) where n is the number of elements in the array.
+Quick sort - O(nlogn) where n is the number of elements in the array.
+Shell sort - O(n(logn)^2) where n is the number of elements in the array.
+Insertion sort - O(n^2) where n is the number of elements in the array.
+Selection sort - O(n^2) where n is the number of elements in the array.
+Bubble sort - O(n^2) where n is the number of elements in the array.
