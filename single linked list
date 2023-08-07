@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct ll {
+    int data;
+    struct ll* next;
+} ll;
+
+void insertAtBeginning(ll** head, int data) 
+{
+    ll* newNode = (ll*)malloc(sizeof(ll));
+    newNode->data = data;
+    newNode->next = *head;
+
+    *head = newNode;
+}
+
+void insertAtEnd(ll** head, int data) 
+{
+    ll* newNode = (ll*)malloc(sizeof(ll));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    ll* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = newNode;
+}
+
+void deleteNode(ll** head, int key)
+ {
+    ll* temp = *head;
+    ll* prev = NULL;
+
+    if (temp != NULL && temp->data == key) {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
+
+    while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL)
+        return;
+
+    prev->next = temp->next;
+
+    free(temp);
+}
+
+void printList(ll* head) 
+{
+    ll* current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+void freeList(ll** head) 
+{
+    ll* current = *head;
+    ll* next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+
+    *head = NULL;
+}
+
+int main()
+ {
+    ll* head = NULL;
+
+    insertAtEnd(&head, 1);
+    insertAtEnd(&head, 2);
+    insertAtBeginning(&head, 3);
+    insertAtEnd(&head, 4);
+
+    printf("Linked list: ");
+    printList(head);
+
+    deleteNode(&head, 2);
+
+    printf("Linked list after deletion: ");
+    printList(head);
+
+    freeList(&head);
+
+    return 0;
+}
